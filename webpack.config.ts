@@ -4,15 +4,29 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import type { Configuration } from 'webpack';
+import type { Configuration as DevServerConfiguration } from "webpack-dev-server";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 interface BuildEnv {
   mode?: 'development' | 'production' | 'none';
+  port?: number | string;
+  open?: boolean;
 }
 
-export default (env: BuildEnv = {}): Configuration => {
+const makeDevServer = (env: BuildEnv = {}): DevServerConfiguration => {
+  const port = typeof env.port === 'string' ? parseInt(env.port, 10) : env.port;
+
+  const devServer = {
+    port: port ?? 3000,
+    open: env.open ?? true,
+  };
+
+  return devServer;
+};
+
+const config = (env: BuildEnv = {}): Configuration => {
   const mode = env.mode ?? 'development';
   const isProd = mode === 'production';
 
@@ -48,7 +62,10 @@ export default (env: BuildEnv = {}): Configuration => {
     cache: { type: 'filesystem' },
     stats: 'minimal',
     infrastructureLogging: { level: 'warn' },
+    devServer: isProd ? undefined : makeDevServer(env),
   };
 
   return config;
 };
+
+export default config;

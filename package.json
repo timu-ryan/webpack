@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "NODE_OPTIONS='--loader ts-node/esm' webpack serve --env mode=development --env port=4000 --config webpack.config.ts",
     "build:dev": "NODE_OPTIONS='--loader ts-node/esm' webpack --env mode=development --config webpack.config.ts",
     "build:prod": "NODE_OPTIONS='--loader ts-node/esm' webpack --env mode=production --config webpack.config.ts"
   },
@@ -20,6 +21,7 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2",
     "webpack": "^5.101.3",
-    "webpack-cli": "^6.0.1"
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
   }
 }
