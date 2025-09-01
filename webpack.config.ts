@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import type { Configuration } from 'webpack';
 import type { Configuration as DevServerConfiguration } from "webpack-dev-server";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -42,6 +43,17 @@ const config = (env: BuildEnv = {}): Configuration => {
     module: {
       rules: [
         {
+          test: /\.s[ac]ss$/i,
+          use: [
+            // Creates `style` nodes from JS strings
+            isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+            // Translates CSS into CommonJS
+            "css-loader",
+            // Compiles Sass to CSS
+            "sass-loader",
+          ],
+        },
+        {
           test: /\.tsx?$/,
           exclude: /node_modules/,
           use: {
@@ -57,6 +69,10 @@ const config = (env: BuildEnv = {}): Configuration => {
     plugins: [
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, 'public', 'index.html'),
+      }),
+      isProd && new MiniCssExtractPlugin({
+        filename: 'css/[name].[contenthash:8].css',
+        chunkFilename: 'css/[name].[contenthash:8].css',
       }),
     ],
     cache: { type: 'filesystem' },
