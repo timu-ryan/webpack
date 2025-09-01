@@ -32,7 +32,7 @@ const config = (env: BuildEnv = {}): Configuration => {
 
   const config: Configuration = {
     mode,
-    entry: path.resolve(__dirname, 'src', 'index.ts'),
+    entry: path.resolve(__dirname, 'src', 'index.tsx'),
     output: {
       path: path.resolve(__dirname, 'build'),
       filename: isProd ? '[name].[contenthash].js' : '[name].js',
