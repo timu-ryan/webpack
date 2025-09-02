@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './App.scss'
+import classes from './App.module.scss';
 
 export const App = () => {
 
@@ -15,7 +15,7 @@ export const App = () => {
         Hello world
       </div>
       <div>{counter}</div>
-      <button onClick={handleClick}>add 1</button>
+      <button className={classes.button} onClick={handleClick}>add 1</button>
     </>
   )
 }
