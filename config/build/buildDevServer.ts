@@ -6,6 +6,8 @@ export function buildDevServer({ port, open }: BuildOptions): DevServerConfigura
   const devServer = {
     port: port ?? 3000,
     open: open ?? true,
+    // config nginx in prod
+    historyApiFallback: true,
   };
 
   return devServer;
