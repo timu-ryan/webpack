@@ -9,7 +9,11 @@
     "allowJs": true,
     "outDir": "./dist/",
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+    },
   },
   "ts-node": {
     "esm": true,
