@@ -8,6 +8,7 @@ export function buildDevServer({ port, open }: BuildOptions): DevServerConfigura
     open: open ?? true,
     // config nginx in prod
     historyApiFallback: true,
+    hot: true,
   };
 
   return devServer;

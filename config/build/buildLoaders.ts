@@ -1,9 +1,12 @@
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import type { ModuleOptions, RuleSetRule } from "webpack";
 import type { BuildOptions } from "./types/types";
+import ReactRefreshTypeScript from 'react-refresh-typescript';
+
 
 export function buildLoaders({ mode }: BuildOptions): ModuleOptions['rules'] {
   const isProd = mode === 'production';
+  const isDev = !isProd;
 
   const assetRule = {
     test: /\.(png|jpg|jpeg|gif)$/i,
@@ -71,7 +74,12 @@ export function buildLoaders({ mode }: BuildOptions): ModuleOptions['rules'] {
     exclude: /node_modules/,
     use: { 
       loader: 'ts-loader', 
-      options: { transpileOnly: true } 
+      options: { 
+        transpileOnly: true,
+        getCustomTransformers: () => ({
+          before: [isDev && ReactRefreshTypeScript()].filter(Boolean),
+        }),
+      } 
     },
   };
 
