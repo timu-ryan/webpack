@@ -23,6 +23,7 @@ const config = (env: BuildEnv = {}): Configuration => {
     entry: path.resolve(__dirname, 'src', 'index.tsx'),
     html: path.resolve(__dirname, 'public', 'index.html'),
     src: path.resolve(__dirname, 'src'),
+    public: path.resolve(__dirname, 'public'),
   }
 
   const config: Configuration = buildWebpack({
