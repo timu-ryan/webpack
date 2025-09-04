@@ -1,6 +1,15 @@
 import React from 'react'
 
 const About = () => {
+
+
+  if (__PLATFORM__ === 'desktop') {
+    return <div>desktop env</div>
+  }
+  if (__PLATFORM__ === "mobile") {
+    return <div>mobile env</div>
+  }
+
   return (
     <div>
 

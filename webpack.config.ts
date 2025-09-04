@@ -4,7 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import type { Configuration } from 'webpack';
 import { buildWebpack } from './config/build/buildWebpack';
-import { BuildMode, BuildPaths } from './config/build/types/types';
+import { BuildMode, BuildPaths, BuildPlatform, isBuildPlatform } from './config/build/types/types';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -14,6 +14,7 @@ interface BuildEnv {
   port?: number | string;
   open?: boolean;
   analyzer?: boolean;
+  platform?: BuildPlatform;
 }
 
 const config = (env: BuildEnv = {}): Configuration => {
@@ -29,6 +30,7 @@ const config = (env: BuildEnv = {}): Configuration => {
     mode: env.mode ?? 'development',
     paths,
     analyzer: env.analyzer,
+    platform: isBuildPlatform(env.platform) ? env.platform : "desktop"
   })
 
   return config;
