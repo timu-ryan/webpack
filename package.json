@@ -8,7 +8,8 @@
     "build:dev": "NODE_OPTIONS='--loader ts-node/esm' webpack --env mode=development --config webpack.config.ts",
     "build:prod": "NODE_OPTIONS='--loader ts-node/esm' webpack --env mode=production --config webpack.config.ts",
     "build:mobile": "NODE_OPTIONS='--loader ts-node/esm' webpack --env mode=production --env platform=mobile --config webpack.config.ts",
-    "build:desktop": "NODE_OPTIONS='--loader ts-node/esm' webpack --env mode=production --env platform=desktop --config webpack.config.ts"
+    "build:desktop": "NODE_OPTIONS='--loader ts-node/esm' webpack --env mode=production --env platform=desktop --config webpack.config.ts",
+    "typecheck": "tsc"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +25,7 @@
     "autoprefixer": "^10.4.21",
     "css-loader": "^7.1.2",
     "cssnano": "^7.1.1",
+    "fork-ts-checker-webpack-plugin": "^9.1.0",
     "html-webpack-plugin": "^5.6.4",
     "mini-css-extract-plugin": "^2.9.4",
     "postcss-loader": "^8.2.0",

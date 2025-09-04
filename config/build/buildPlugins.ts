@@ -4,6 +4,7 @@ import type { Configuration } from 'webpack';
 import webpack from 'webpack';
 import type { BuildOptions } from './types/types';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 
 export function buildPlugins({ mode, paths, analyzer, platform }: BuildOptions): Configuration['plugins'] {
   const isProd = mode === 'production';
@@ -20,6 +21,7 @@ export function buildPlugins({ mode, paths, analyzer, platform }: BuildOptions):
 
   if (isDev) {
     plugins.push(new webpack.ProgressPlugin());
+    plugins.push(new ForkTsCheckerWebpackPlugin());
   }
 
   if (isProd) {
